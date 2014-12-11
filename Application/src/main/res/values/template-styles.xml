@@ -29,6 +29,7 @@
 
     <style name="Widget.SampleMessage">
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <!--设置行间距的倍数-->
         <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
 

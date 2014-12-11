@@ -29,6 +29,12 @@ import com.example.android.common.logger.LogWrapper;
 import com.example.android.common.logger.MessageOnlyLogFilter;
 
 /**
+ * 【汉】该页面包含了一下内容：对该示例的摘要说明、log页面，和一个用来展示RecyclerView的Fragment。
+ * <p>
+ *  对于那些屏幕宽度大于等于720dp的设备，log页面一直可见。其他设备上，通过ActionBar上的一个item来
+ *  切换它的可见性。
+ * <p>
+ *
  * A simple launcher activity containing a summary sample description, sample log and a custom
  * {@link android.support.v4.app.Fragment} which can display a view.
  * <p>
@@ -40,7 +46,7 @@ public class MainActivity extends SampleActivityBase {
     public static final String TAG = "MainActivity";
 
     // Whether the Log Fragment is currently shown
-    private boolean mLogShown;
+    private boolean mLogShown;//log Fragment当前是否可见
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class MainActivity extends SampleActivityBase {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem logToggle = menu.findItem(R.id.menu_toggle_log);
         logToggle.setVisible(findViewById(R.id.sample_output) instanceof ViewAnimator);
-        logToggle.setTitle(mLogShown ? R.string.sample_hide_log : R.string.sample_show_log);
+        logToggle.setTitle(mLogShown ? R.string.sample_hide_log : R.string.sample_show_log);//设置item文字
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -77,11 +83,11 @@ public class MainActivity extends SampleActivityBase {
                 mLogShown = !mLogShown;
                 ViewAnimator output = (ViewAnimator) findViewById(R.id.sample_output);
                 if (mLogShown) {
-                    output.setDisplayedChild(1);
+                    output.setDisplayedChild(1);//切换展示内容
                 } else {
                     output.setDisplayedChild(0);
                 }
-                supportInvalidateOptionsMenu();
+                supportInvalidateOptionsMenu();//重新绘制optionMenu，将调用onPrepareOptionsMenu方法。
                 return true;
         }
         return super.onOptionsItemSelected(item);

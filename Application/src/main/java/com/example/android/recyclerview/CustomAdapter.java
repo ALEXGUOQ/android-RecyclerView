@@ -16,15 +16,17 @@
 
 package com.example.android.recyclerview;
 
-import com.example.android.common.logger.Log;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.android.common.logger.Log;
+
 /**
+ * 【汉】从mDataSet里面取数据，然后为RecyclerView提供view
+ *<p>
  * Provide views to RecyclerView with data from mDataSet.
  */
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
@@ -34,6 +36,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
+     * 【汉】从你使用的view中提供一个引用。自定义ViewHolder<p>
+     *
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -42,6 +46,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         public ViewHolder(View v) {
             super(v);
             // Define click listener for the ViewHolder's View.
+            // 【汉】为ViewHolder中的view添加点击事件
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -59,7 +64,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     /**
      * Initialize the dataset of the Adapter.
-     *
+     *【汉】为adapter初始化数据源
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
     public CustomAdapter(String[] dataSet) {
@@ -68,9 +73,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
     // Create new views (invoked by the layout manager)
+    // 创建新的view，（被Layout Manager调用）
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
+        // 创建一个新的view
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.text_row_item, viewGroup, false);
 
@@ -80,17 +87,21 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     // BEGIN_INCLUDE(recyclerViewOnBindViewHolder)
     // Replace the contents of a view (invoked by the layout manager)
+    // 替换view中的数据。（被Layout Manager调用）
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Log.d(TAG, "Element " + position + " set.");
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
+        //从dataset中获得相应位置的元素，用这个元素的数据设置到view中区
+
         viewHolder.getTextView().setText(mDataSet[position]);
     }
     // END_INCLUDE(recyclerViewOnBindViewHolder)
 
     // Return the size of your dataset (invoked by the layout manager)
+    // 返回你的数据的总数，（被Layout Manager调用）
     @Override
     public int getItemCount() {
         return mDataSet.length;
